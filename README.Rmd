@@ -1,0 +1,26 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# fastaR
+
+
+### faSize
+```{r, eval=TRUE,echo=FALSE,warning=FALSE}
+source("R/fa_utils.R")
+faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+
+```
+
+
