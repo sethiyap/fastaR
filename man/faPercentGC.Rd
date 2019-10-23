@@ -2,7 +2,7 @@
 % Please edit documentation in R/fa_utils.R
 \name{faPercentGC}
 \alias{faPercentGC}
-\title{Get GC percent}
+\title{Get GC percent for multi-fasta file}
 \usage{
 faPercentGC(fasta_file)
 }

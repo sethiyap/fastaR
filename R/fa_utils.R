@@ -149,7 +149,7 @@ faSummary <- function(fasta_file){
 }
 
 
-#' Get GC percent
+#' Get GC percent for multi-fasta file
 #' @description for given multi-fasta file get GC percent for each sequence
 #' @param fasta_file Either a path or a connection to multi-fasta file. The
 #'   input sequence file should have extention .fa or .fasta
