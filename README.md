@@ -3,28 +3,14 @@
 fastaR
 ======
 
-### faSize
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) [![platform](https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen)](https://shields.io/category/platform-support) <!-- badges: end -->
 
-    #> 
-    #> 
-    #> Seq_id      Length 
-    #> ----------  -------
-    #> YAL001C     3483   
-    #> YAL002W     3825   
-    #> YAL003W     621    
-    #> YAL004W     648    
-    #> YAL005C     1929   
-    #> YAL007C     648    
-    #> YAL008W     597    
-    #> YAL009W     780    
-    #> YAL010C     1482   
-    #> YAL011W     1878   
-    #> YAL012W     1185   
-    #> YAL013W     1218   
-    #> YAL014C     768    
-    #> YAL015C     1200   
-    #> YAL016C-A   315    
-    #> YAL016C-B   186    
-    #> YAL016W     1908   
-    #> YAL017W     4071
-    #> Sc_orf_coding_R64-2-1.size file is saved in working directory!
+### faUtils
+
+``` r
+faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
+faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+faPercentGC(fasta_file = "Sc_orf_coding_R64-2-1.fasta")
+```
