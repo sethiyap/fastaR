@@ -36,10 +36,6 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           overlap <- input_sequence[ID[,1]]
 
-          # print(overlap)
-
-         # message(cat(outfile)," contains ",length(names(overlap))," Sequences")
-
           ## write fasta file
 
           Biostrings::writeXStringSet(x =overlap, filepath = outfile, format = "fasta")
@@ -60,6 +56,8 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #' @importFrom utils write.table
 #' @importFrom knitr kable
 #' @importFrom kableExtra kable_styling
+#' @importFrom kableExtra row_spec
+#' @importFrom kableExtra column_spec
 #' @examples
 #' \dontrun{
 #'
@@ -86,11 +84,12 @@ faSize <- function(fasta_file){
 
           #message( paste(output_name,".size", sep=""), " file is saved in working directory!")
 
-          genome_size_mat %>% utils::head() %>%
-                    knitr::kable() %>%
-                    kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
-                    kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
+          temp <- genome_size_mat %>% utils::head(.)
 
+          knitr::kable(temp,"html", align = "l") %>%
+                    kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F,font_size =14,  stripe_color = "aquamarine3") %>%
+                    kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
+                    kableExtra::column_spec(1:2, bold=FALSE, color="blue")
 
 
 }
@@ -113,7 +112,9 @@ faSize <- function(fasta_file){
 #' @importFrom dplyr summarise
 #' @importFrom knitr kable
 #' @importFrom kableExtra kable_styling
-#' @importFrom dplyr %>%
+#' @importFrom dplyr n
+#' @importFrom kableExtra row_spec
+#' @importFrom kableExtra column_spec
 #'
 #' @examples
 #' \dontrun{
@@ -134,17 +135,16 @@ faSummary <- function(fasta_file){
                     summary_length <- cbind(base::names(input_sequence), Biostrings::width(input_sequence)) %>%
                                         tidyr::as_tibble() %>%
                                         dplyr::mutate(V2 =as.numeric(V2)) %>%
-                                        dplyr::summarise( num_of_seq=n(),min=min(V2), max=max(V2),mean=round(mean(V2),2),
+                                        dplyr::summarise( num_of_seq=dplyr::n(),min=min(V2), max=max(V2),mean=round(mean(V2),2),
                                                    median= round(median(V2),2)) %>%
                                         dplyr::mutate(percent_gc = round(100*(gc_content/total_length),2))
 
-                    knitr::kable(t(summary_length), col.names = c("Summary")) %>%
-                              kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
 
 
-                    knitr::kable(t(summary_length), col.names = c("Summary")) %>%
-                              kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
-                              kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
+                    knitr::kable(t(summary_length), col.names = c("Summary"),"html", align = "l") %>%
+                              kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F,font_size =14,  stripe_color = "aquamarine3") %>%
+                              kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
+                              kableExtra::column_spec(1:2, bold=FALSE, color="blue")
 
 
 
@@ -168,6 +168,8 @@ faSummary <- function(fasta_file){
 #' @importFrom readr write_delim
 #' @importFrom knitr kable
 #' @importFrom kableExtra kable_styling
+#' @importFrom kableExtra row_spec
+#' @importFrom kableExtra column_spec
 #' @examples
 #' \dontrun{
 #'
@@ -217,8 +219,8 @@ faPercentGC <- function(fasta_file){
           }
 
           gc_each_seq %>% dplyr::select(c("names","percent_gc")) %>% utils::head() %>%
-                    knitr::kable() %>%
-                    kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
-                     kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
-
+                    knitr::kable(.,"html", align = "l") %>%
+                    kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F,font_size =14,  stripe_color = "aquamarine3") %>%
+                    kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
+                    kableExtra::column_spec(1:2, bold=FALSE, color="blue")
 }

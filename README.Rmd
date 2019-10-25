@@ -1,5 +1,8 @@
 ---
-output: github_document
+output:  
+   html_document:
+      self_contained: false
+      keep_md: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -27,7 +30,9 @@ source("R/fa_utils.R")
 suppressPackageStartupMessages(library(dplyr))
 myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
 ```
-```{r, eval=TRUE,echo=FALSE,warning=FALSE}
+
+
+```{r, eval=TRUE,echo=TRUE,warning=FALSE}
 faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
 faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
