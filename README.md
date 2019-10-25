@@ -10,6 +10,7 @@ fastaR
 ### faUtils
 
 ``` r
+
 faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 ```
 
@@ -76,7 +77,9 @@ YAL007C
 </tbody>
 </table>
 ``` r
+
 faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
+
 faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 ```
 
@@ -142,6 +145,7 @@ percent\_gc
 </tbody>
 </table>
 ``` r
+
 faPercentGC(fasta_file = "Sc_orf_coding_R64-2-1.fasta")
 #> plotting GC percent for each sequence
 ```
