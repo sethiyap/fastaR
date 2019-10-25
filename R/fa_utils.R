@@ -30,7 +30,7 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
 
           ID = as.matrix(gene_list)
-          message("no. of ID's: ", nrow(ID))
+          #message("no. of ID's: ", nrow(ID))
 
           ## Find overlap between ID's and fasta file
 
@@ -38,7 +38,7 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           # print(overlap)
 
-          message(cat(outfile)," contains ",length(names(overlap))," Sequences")
+         # message(cat(outfile)," contains ",length(names(overlap))," Sequences")
 
           ## write fasta file
 
@@ -59,6 +59,7 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #' @importFrom Biostrings width
 #' @importFrom utils write.table
 #' @importFrom knitr kable
+#' @importFrom kableExtra kable_styling
 #' @examples
 #' \dontrun{
 #'
@@ -82,9 +83,15 @@ faSize <- function(fasta_file){
           utils::write.table(genome_size_mat, file = paste(output_name,".size", sep=""), quote = FALSE,col.names = FALSE, row.names = FALSE,sep = "\t")
 
           colnames(genome_size_mat) <- c("Seq_id", "Length")
-          print(knitr::kable(genome_size_mat))
 
-          message( paste(output_name,".size", sep=""), " file is saved in working directory!")
+          #message( paste(output_name,".size", sep=""), " file is saved in working directory!")
+
+          genome_size_mat %>% utils::head() %>%
+                    knitr::kable() %>%
+                    kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
+                    kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
+
+
 
 }
 
@@ -105,7 +112,7 @@ faSize <- function(fasta_file){
 #' @importFrom dplyr mutate
 #' @importFrom dplyr summarise
 #' @importFrom knitr kable
-#' @importFrom grid grid.newpage
+#' @importFrom kableExtra kable_styling
 #' @importFrom dplyr %>%
 #'
 #' @examples
@@ -131,18 +138,13 @@ faSummary <- function(fasta_file){
                                                    median= round(median(V2),2)) %>%
                                         dplyr::mutate(percent_gc = round(100*(gc_content/total_length),2))
 
-                    # print to console
-                    print(knitr::kable(t(summary_length), col.names = c("Summary")))
+                    knitr::kable(t(summary_length), col.names = c("Summary")) %>%
+                              kableExtra::kable_styling(bootstrap_options = "striped", full_width = F)
 
-                    # print in the plot panel
 
-                    grid::grid.newpage()
-                    tt3 <- gridExtra::ttheme_minimal(
-                               core=list(bg_params = list(fill = blues9[1:4], col=NA),
-                                    fg_params=list(fontface=3)),
-                                 colhead=list(fg_params=list(col="orange", fontface=4L)),
-                                 rowhead=list(fg_params=list(col="navyblue", fontface=3L)))
-                     gridExtra::grid.table(summary_length, theme=tt3)
+                    knitr::kable(t(summary_length), col.names = c("Summary")) %>%
+                              kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
+                              kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
 
 
 
@@ -164,6 +166,8 @@ faSummary <- function(fasta_file){
 #' @importFrom dplyr mutate
 #' @import ggplot2
 #' @importFrom readr write_delim
+#' @importFrom knitr kable
+#' @importFrom kableExtra kable_styling
 #' @examples
 #' \dontrun{
 #'
@@ -187,6 +191,7 @@ faPercentGC <- function(fasta_file){
           gc_each_seq <- nucl_table %>%
                               dplyr::mutate(percent_gc = round(100*(as.numeric(gc)/as.numeric(sequence_len)),2))
 
+
           if(nrow(gc_each_seq) <= 20){
 
                     message("plotting GC percent for each sequence")
@@ -207,9 +212,13 @@ faPercentGC <- function(fasta_file){
           }
 
           else{
-                    message("saving to output file")
 
                     readr::write_delim(gc_each_seq, path = paste(output_name,"_percentGC.tab"), delim = "\t", col_names = TRUE)
           }
+
+          gc_each_seq %>% dplyr::select(c("names","percent_gc")) %>% utils::head() %>%
+                    knitr::kable() %>%
+                    kableExtra::kable_styling(bootstrap_options = "striped", full_width = F, stripe_color = "aquamarine3") %>%
+                     kableExtra::row_spec(0,bold = TRUE, italic = TRUE, color = "black")
 
 }
