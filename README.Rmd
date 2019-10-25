@@ -17,10 +17,10 @@ knitr::opts_chunk$set(
 
 # fastaR
 
-<!-- badges: start -->
-<!-- [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
-<!-- [![platform](https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen)](https://shields.io/category/platform-support) -->
-<!-- badges: end -->
+badges: start
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![platform](https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen)](https://shields.io/category/platform-support)
+badges: end
 
 
 ### faUtils
@@ -31,18 +31,18 @@ suppressPackageStartupMessages(library(dplyr))
 myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
 ```
 
-```{r, eval=TRUE,echo=TRUE,warning=FALSE}
+```{r, eval=FALSE,echo=TRUE,warning=FALSE}
 faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 ```
 
-```{r, eval=TRUE,echo=TRUE,warning=FALSE}
+```{r, eval=FALSE,echo=TRUE,warning=FALSE}
 faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
 ```
 
-```{r, eval=TRUE,echo=TRUE,warning=FALSE}
+```{r, eval=FALSE,echo=TRUE,warning=FALSE}
 faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 ```
 
-```{r, eval=TRUE,echo=TRUE,warning=FALSE}
+```{r, eval=FALSE,echo=TRUE,warning=FALSE}
 faPercentGC(fasta_file = "Sc_orf_coding_R64-2-1.fasta")
 ```
