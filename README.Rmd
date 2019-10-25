@@ -1,8 +1,6 @@
 ---
-output:  
-   html_document:
-      self_contained: false
-      keep_md: true
+output: github_document
+always_allow_html: yes
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -38,7 +36,3 @@ faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta"
 faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 faPercentGC(fasta_file = "Sc_orf_coding_R64-2-1.fasta")
 ```
-
-
-
-
