@@ -23,26 +23,15 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 
+## Install
+
+```
+devtools::install_github("sethiyap/fastaR")
+```
+
 ### faUtils
 
-```{r, eval=TRUE,echo=FALSE,warning=FALSE}
-source("R/fa_utils.R")
-suppressPackageStartupMessages(library(dplyr))
-myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
-```
-
-```{r, eval=FALSE,echo=TRUE,warning=FALSE}
-faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
-```
-
-```{r, eval=FALSE,echo=TRUE,warning=FALSE}
-faSomeRecords(gene_list=myGenelist , fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
-```
-
-```{r, eval=FALSE,echo=TRUE,warning=FALSE}
-faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
-```
-
-```{r, eval=FALSE,echo=TRUE,warning=FALSE}
-faPercentGC(fasta_file = "Sc_orf_coding_R64-2-1.fasta")
-```
+- `faSomeRecords()`
+- `faSize()`
+- `faSummary()`
+- `faPercentGC()`
