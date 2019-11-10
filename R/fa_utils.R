@@ -26,7 +26,7 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           ##Read fasta file
           input_sequence = Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
-          names(input_sequence) <- base::gsub('[ \\s | :].*', '', names(input_sequence))
+          names(input_sequence) <- base::gsub('[[:space:]| :].*', '', names(input_sequence))
 
 
           ID = as.matrix(gene_list)
@@ -70,7 +70,7 @@ faSize <- function(fasta_file){
           input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
 
           #---- extract names and chromosome length
-          names(input_sequence) <- base::gsub('[ \\s | :].*', '', names(input_sequence))
+          names(input_sequence) <- base::gsub('[[:space:]| :].*', '', names(input_sequence))
 
           genome_size_mat <- base::cbind(base::names(input_sequence), Biostrings::width(input_sequence))
 
@@ -125,7 +125,7 @@ faSummary <- function(fasta_file){
 
                     # read input sequences as biostring object
                     input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
-                    base::names(input_sequence) <- base::gsub('[ \\s | :].*', '', base::names(input_sequence))
+                    base::names(input_sequence) <- base::gsub('[[:space:]| :].*', '', base::names(input_sequence))
 
                     # compute input sequence lengths
                     total_length <-  Biostrings::letterFrequency(input_sequence,letters = "ATGC", collapse=TRUE)
@@ -138,7 +138,6 @@ faSummary <- function(fasta_file){
                                         dplyr::summarise( num_of_seq=dplyr::n(),min=min(V2), max=max(V2),mean=round(mean(V2),2),
                                                    median= round(median(V2),2)) %>%
                                         dplyr::mutate(percent_gc = round(100*(gc_content/total_length),2))
-
 
 
                     knitr::kable(t(summary_length), col.names = c("Summary"),"html", align = "l") %>%
@@ -179,7 +178,7 @@ faPercentGC <- function(fasta_file){
 
           # read input sequences as biostring object
           input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
-          base::names(input_sequence) <- base::gsub('[ \\s | :].*', '', base::names(input_sequence))
+          base::names(input_sequence) <- base::gsub('[[:space:]| :].*', '', base::names(input_sequence))
 
           output_name <- base::gsub(".fa.*","", basename(fasta_file))
 
