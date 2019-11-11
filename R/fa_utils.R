@@ -19,10 +19,10 @@
 #'
 #'  myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
 #'
-#'  faSomeRecords(gene_list=myGenelist, fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
+#'  fa_some_records(gene_list=myGenelist, fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
 #'
 #' }
-faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
+fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           ##Read fasta file
           input_sequence = Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
@@ -61,10 +61,10 @@ faSomeRecords <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #' @examples
 #' \dontrun{
 #'
-#'  faSize(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  fa_size(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 #'
 #' }
-faSize <- function(fasta_file){
+fa_size <- function(fasta_file){
 
           #---- read input genome fasta sequence
           input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
@@ -119,9 +119,9 @@ faSize <- function(fasta_file){
 #' @examples
 #' \dontrun{
 #'
-#'  faSummary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  fa_summary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 #' }
-faSummary <- function(fasta_file){
+fa_summary <- function(fasta_file){
 
                     # read input sequences as biostring object
                     input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
@@ -172,9 +172,9 @@ faSummary <- function(fasta_file){
 #' @examples
 #' \dontrun{
 #'
-#'  faPercentGC(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  fa_percent_GC(fasta_file="Sc_orf_coding_R64-2-1.fasta")
 #' }
-faPercentGC <- function(fasta_file){
+fa_percent_GC <- function(fasta_file){
 
           # read input sequences as biostring object
           input_sequence <- Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
