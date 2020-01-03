@@ -11,7 +11,8 @@
 #'   output
 #' @importFrom Biostrings readDNAStringSet
 #' @importFrom Biostrings writeXStringSet
-#' @return A multi-fasta file, containing sequences of given input list
+#' @import magrittr
+#' @return A multi-fasta file, containing sequences of given input list id's.
 #' @export
 #'
 #' @examples
@@ -26,15 +27,20 @@ fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           ##Read fasta file
           input_sequence = Biostrings::readBStringSet(filepath=fasta_file,use.names = TRUE)
-          names(input_sequence) <- base::gsub('[[:space:]| :].*', '', names(input_sequence))
+         # names(input_sequence) <- base::gsub('[[:space:]| :].*', '', names(input_sequence))
 
+          renamed_seq <- names(input_sequence) %>%
+                              tidyr::tibble(rownames = .) %>%
+                              dplyr::mutate(seq_new=base::gsub('[[:space:]| :].*', '', rownames))
 
-          ID = as.matrix(gene_list)
+          ID <- as.matrix(gene_list)
+          overlapped_id <- subset(renamed_seq, renamed_seq$seq_new %in% ID)
+
           #message("no. of ID's: ", nrow(ID))
 
           ## Find overlap between ID's and fasta file
 
-          overlap <- input_sequence[ID[,1]]
+          overlap <-  input_sequence[which(names(input_sequence) %in% overlapped_id$rownames),]
 
           ## write fasta file
 

@@ -18,7 +18,7 @@ retrieved.}
 output}
 }
 \value{
-A multi-fasta file, containing sequences of given input list
+A multi-fasta file, containing sequences of given input list id's.
 }
 \description{
 Get fasta sequences of given input list from reference
