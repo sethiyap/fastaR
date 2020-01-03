@@ -13,7 +13,10 @@ file, file format should be standard UCSC bed format with column:
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input list is to be
-retrieved.}
+retrieved.
+In the sequence header: only string before first space and/or first colon (:)
+will be considered for futher processes.
+**Important consideration when header have big names.}
 
 \item{outfile}{A character vector, determining outfile name, default: out}
 }

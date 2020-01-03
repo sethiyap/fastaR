@@ -54,6 +54,8 @@ fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #'
 #' @param fasta_file Either a path or a connection to multi-fasta file.
 #'   The input sequence file should have extention .fa or .fasta
+#'   In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
+#'   **Important consideration when header have big names.
 #'
 #' @return Tab delimited .size file
 #' @export
@@ -105,7 +107,8 @@ fa_size <- function(fasta_file){
 #'   length, GC content etc
 #' @param fasta_file Either a path or a connection to multi-fasta file.
 #'   The input sequence file should have extention .fa or .fasta
-#'
+#'   In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
+#'   **Important consideration when header have big names.
 #' @return A summary table
 #' @export
 #' @importFrom Biostrings readDNAStringSet
@@ -160,7 +163,8 @@ fa_summary <- function(fasta_file){
 #' @description for given multi-fasta file get GC percent for each sequence
 #' @param fasta_file Either a path or a connection to multi-fasta file. The
 #'   input sequence file should have extention .fa or .fasta
-#'
+#'   In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
+#'   **Important consideration when header have big names.
 #' @return A output file of GC percent and a barplot of GC percent distribution
 #'  \code{if the fasta file contains sequences less than 20}
 #' @export

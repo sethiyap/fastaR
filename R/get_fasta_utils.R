@@ -9,6 +9,9 @@
 #' @param fasta_file Either a path or a connection to reference multi-fasta
 #'   file, from which subset of sequences for given input list is to be
 #'   retrieved.
+#'   In the sequence header: only string before first space and/or first colon (:)
+#'   will be considered for futher processes.
+#'   **Important consideration when header have big names.
 #' @param outfile A character vector, determining outfile name, default: out
 #'
 #' @return A output fasta file of sequences in given bed region
@@ -46,19 +49,23 @@ get_fasta_from_bed <- function(bedFile,fasta_file,outfile="out"){
 #' get fasta sequences of promoters
 #' @description Extracts promoter sequences from input bed/gff file
 #'
-#' @param feature_file A character vector containing path to the file to either a bed
-#'   file, file format should be standard UCSC bed format with column:
+#' @param feature_file A character vector containing path to the file to either
+#'   a bed file, file format should be standard UCSC bed format with column:
 #'   \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand} OR
-#'   gene feature file with extention \code{.gff or .gff3 }
-#'   ** Chromosome names should be same as fasta file
+#'   gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
+#'   should be same as fasta file
 #' @param fasta_file Either a path or a connection to reference multi-fasta
 #'   file, from which subset of sequences for given input list is to be
-#'   retrieved.
-#' @param outfile A character vector, determining outfile name, default: promoter_out
+#'   retrieved. In the sequence header: only string before first space and/or
+#'   first colon (:) will be considered for futher processes. **Important
+#'   consideration when header have big names.
+#' @param outfile A character vector, determining outfile name, default:
+#'   promoter_out
 #' @param upstream_bp numeric, base pairs uprstream of start coordinate
 #' @param downstream_bp numeric, base pairs downstream of start coordinate
 #'
-#' @return A output fasta file of promoter sequences and bed file of the promoter region
+#' @return A output fasta file of promoter sequences and bed file of the
+#'   promoter region
 #' @export
 #' @importFrom GenomicFeatures makeTxDbFromGFF
 #' @importFrom GenomicFeatures genes
@@ -89,7 +96,7 @@ get_fasta_from_bed <- function(bedFile,fasta_file,outfile="out"){
 #' }
 #'
 get_promoter_from_feature <- function(feature_file,fasta_file,outfile="promoter_out", upstream_bp=500, downstream_bp=1){
-          library(dplyr)
+
 
           if(stringr::str_detect(string = as.character(basename(feature_file)),pattern=".gff")){
 
@@ -132,5 +139,154 @@ get_promoter_from_feature <- function(feature_file,fasta_file,outfile="promoter_
           print(seq)
           rtracklayer::export.bed(object = promoter_tidy_filtered,con = paste0(outfile,"_",length(promoter_bed), "promoters.bed"))
           Biostrings::writeXStringSet(seq, filepath = paste0(outfile,"_",length(seq), "sequences.fasta"))
+
+}
+
+
+#' get flanking regions from feature file
+#'
+#' @description Extracts sequences of one of the flank type described.
+#' @param feature_file A character vector containing path to the file to either
+#'   a bed file, file format should be standard UCSC bed format with column:
+#'   \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand} OR
+#'   gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
+#'   should be same as fasta file
+#' @param width Numeric, width to determine the flank length
+#' @param flank_type Numeric,choose region whose sequence (of width length) is
+#'   to be fetched. \itemize{ \item 1: sequence upstream of start coordinate
+#'   \item 2: sequence downstream of start coordinate \item 3: sequence downstream of end coordinate \item 4: upstream and
+#'   downstream of start coordinate \item 5: upstream and downstream of end
+#'   coordinate \item 6: upstream and downstream of feature/gene coordinates
+#'   \item 7: middle region, ie. width length from start and end coordinate
+#'   Start----->ATGCGGATGCGGTC<------End } \code{default: 1}
+#' @param outfile A character vector, determining outfile name, \code{default:
+#'   flank_out}
+#' @param fasta_file Either a path or a connection to reference multi-fasta
+#'   file, from which subset of sequences for given input list is to be
+#'   retrieved. In the sequence header: only string before first space and/or
+#'   first colon (:) will be considered for futher processes. **Important
+#'   consideration when header have big names.
+#' @importFrom GenomicFeatures makeTxDbFromGFF
+#' @importFrom GenomicFeatures genes
+#' @importFrom stringr str_detect
+#' @importFrom rtracklayer import.bed
+#' @importFrom GenomicRanges mcols
+#' @importFrom Biostrings readDNAStringSet
+#' @importFrom IRanges width
+#' @importFrom dplyr mutate
+#' @importFrom dplyr select
+#' @importFrom BSgenome getSeq
+#' @importFrom rtracklayer export.bed
+#' @importFrom GenomicRanges makeGRangesFromDataFrame
+#' @importFrom Biostrings writeXStringSet
+#' @importFrom Rsamtools FaFile
+#' @importFrom Rsamtools indexFa
+#' @importFrom GenomicRanges flank
+#' @importFrom IRanges subsetByOverlaps
+#' @return
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' feature_file <- "Sc_orf_coding_R64-2-1.bed"
+#' fasta_file <- "S288C_reference_sequence_R64-2-1_20150113.fa"
+#' get_flank_from_feature(feature_file = feature_file, fasta_file = fasta_file, flank_type = 2)
+#'
+#' }
+get_flank_from_feature <- function(feature_file,fasta_file,width=10,flank_type=1,outfile="flank_out"){
+
+          #----- Load Reference feature file
+
+          if(stringr::str_detect(string = as.character(basename(feature_file)),pattern=".gff")){
+
+                    gff = GenomicFeatures::makeTxDbFromGFF(feature_file)
+                    bedfile = GenomicFeatures::genes(gff)
+                    base::names(bedfile)=NULL
+                    gene_name <- names(GenomicRanges::mcols(bedfile)[1])
+          }
+          if(stringr::str_detect(string = as.character(basename(feature_file)),pattern=".bed")){
+                    bedfile = rtracklayer::import.bed(feature_file)
+                    gene_name <- names(GenomicRanges::mcols(bedfile)[1])
+          }
+
+
+          #--- Upstream of start codon
+          if(flank_type==1){
+
+                    flank_region <- GenomicRanges::flank(bedfile, start = T,both = F, width=width)
+
+          }
+
+          #--- Downstream of start codon
+
+          if(flank_type==2){
+
+                    flank_region <- GenomicRanges::promoters(bedfile, downstream = width, upstream = 0)
+          }
+
+          #--- Downstream of stop codon
+          if(flank_type==3){
+
+                    flank_region <- GenomicRanges::flank(bedfile, start = F,both = F, width=width)
+
+          }
+
+          #--- Upstream and Downstream of start codon
+
+          if(flank_type==4){
+
+                    flank_region <- GenomicRanges::flank(bedfile, start = T,both = T, width=width)
+
+          }
+
+          #--- Upstream and Downstream of stop codon
+          if(flank_type==5){
+
+                    flank_region <- GenomicRanges::flank(bedfile, start = F,both = T, width=width)
+
+          }
+
+          #--- Upstream and Downstream of CDS region
+          if(flank_type==6){
+
+                    flank_region <- bedfile+width
+
+          }
+
+          #--- substract from start and end of CDS region, i.e. how much region within orf from start and end
+          #    Start----->---------<------Stop
+          if(flank_type==7){
+
+                    flank_region <- bedfile-width
+
+          }
+
+          #---- Get the sequence
+          Rsamtools::indexFa(fasta_file)
+          genome <- Rsamtools::FaFile(fasta_file)
+          dna <- Biostrings::readDNAStringSet(fasta_file)
+          names(dna) <- gsub(' .*', '',names(dna))
+
+          #---- Check whether the region boundaries are within genome, remove if out of range
+
+          dd = data.frame(cbind(names(dna), width(dna))) %>%
+                    dplyr::mutate(Start=rep(1,length(names(dna)))) %>%
+                    dplyr::select(c("X1","Start","X2"))
+
+          colnames(dd)=c("Chr","Start","End")
+
+          dd$Chr <- gsub(' .*', '',dd$Chr)
+
+          dd = GenomicRanges::makeGRangesFromDataFrame(dd)
+
+          flank_region_within_bound <- IRanges::subsetByOverlaps(flank_region,dd,type = "within")
+
+          #---- Get Sequence of within range regions
+          flank_seq <- BSgenome::getSeq(dna, flank_region_within_bound)
+          names(flank_seq) = flank_region_within_bound$name
+
+          Biostrings::writeXStringSet(flank_seq,filepath=paste(outfile, ".fa",sep=""),append=FALSE,format="fasta" )
+          rtracklayer::export.bed(object = flank_region,paste(outfile, ".bed",sep=""))
 
 }

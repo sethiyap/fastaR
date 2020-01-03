@@ -4,28 +4,37 @@
 \alias{get_promoter_from_feature}
 \title{get fasta sequences of promoters}
 \usage{
-get_promoter_from_feature(feature_file, fasta_file,
-  outfile = "promoter_out", upstream_bp = 500, downstream_bp = 1)
+get_promoter_from_feature(
+  feature_file,
+  fasta_file,
+  outfile = "promoter_out",
+  upstream_bp = 500,
+  downstream_bp = 1
+)
 }
 \arguments{
-\item{feature_file}{A character vector containing path to the file to either a bed
-file, file format should be standard UCSC bed format with column:
+\item{feature_file}{A character vector containing path to the file to either
+a bed file, file format should be standard UCSC bed format with column:
 \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand} OR
-gene feature file with extention \code{.gff or .gff3 }
-** Chromosome names should be same as fasta file}
+gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
+should be same as fasta file}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input list is to be
-retrieved.}
+retrieved. In the sequence header: only string before first space and/or
+first colon (:) will be considered for futher processes. **Important
+consideration when header have big names.}
 
-\item{outfile}{A character vector, determining outfile name, default: promoter_out}
+\item{outfile}{A character vector, determining outfile name, default:
+promoter_out}
 
 \item{upstream_bp}{numeric, base pairs uprstream of start coordinate}
 
 \item{downstream_bp}{numeric, base pairs downstream of start coordinate}
 }
 \value{
-A output fasta file of promoter sequences and bed file of the promoter region
+A output fasta file of promoter sequences and bed file of the
+  promoter region
 }
 \description{
 Extracts promoter sequences from input bed/gff file

@@ -8,7 +8,9 @@ fa_summary(fasta_file)
 }
 \arguments{
 \item{fasta_file}{Either a path or a connection to multi-fasta file.
-The input sequence file should have extention .fa or .fasta}
+The input sequence file should have extention .fa or .fasta
+In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
+**Important consideration when header have big names.}
 }
 \value{
 A summary table

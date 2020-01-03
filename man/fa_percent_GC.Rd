@@ -8,7 +8,9 @@ fa_percent_GC(fasta_file)
 }
 \arguments{
 \item{fasta_file}{Either a path or a connection to multi-fasta file. The
-input sequence file should have extention .fa or .fasta}
+input sequence file should have extention .fa or .fasta
+In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
+**Important consideration when header have big names.}
 }
 \value{
 A output file of GC percent and a barplot of GC percent distribution
