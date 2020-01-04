@@ -8,6 +8,7 @@
 [![platform](https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen)](https://shields.io/category/platform-support) 
 <!-- badges: end --> 
 
+
 Fasta sequence manipulation is required while performing gene set or
 genome-wide analysis in RNASeq and ChIPSeq. Sequences of group of genes
 belonging to a pathway or biological term helps to determine the
@@ -38,3 +39,4 @@ file `(.fa or .fasta)`.
   - `get_fasta_from_bed()`
   - `get_promoter_from_feature()`
   - `get_flank_from_feature()`
+  - `get_random_sequences_from_fasta()`

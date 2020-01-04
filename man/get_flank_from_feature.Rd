@@ -20,7 +20,7 @@ gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
 should be same as fasta file}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
-file, from which subset of sequences for given input list is to be
+file, from which subset of sequences for given input feature is to be
 retrieved. In the sequence header: only string before first space and/or
 first colon (:) will be considered for futher processes. **Important
 consideration when header have big names.}

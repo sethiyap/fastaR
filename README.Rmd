@@ -41,3 +41,4 @@ devtools::install_github("sethiyap/fastaR")
 - `get_fasta_from_bed()`
 - `get_promoter_from_feature()`
 - `get_flank_from_feature()`
+- `get_random_sequences_from_fasta()`

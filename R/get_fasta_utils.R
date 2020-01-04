@@ -7,7 +7,7 @@
 #'   file, file format should be standard UCSC bed format with column:
 #'   \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand}
 #' @param fasta_file Either a path or a connection to reference multi-fasta
-#'   file, from which subset of sequences for given input list is to be
+#'   file, from which subset of sequences for given input feature is to be
 #'   retrieved.
 #'   In the sequence header: only string before first space and/or first colon (:)
 #'   will be considered for futher processes.
@@ -162,7 +162,7 @@ get_promoter_from_feature <- function(feature_file,fasta_file,outfile="promoter_
 #' @param outfile A character vector, determining outfile name, \code{default:
 #'   flank_out}
 #' @param fasta_file Either a path or a connection to reference multi-fasta
-#'   file, from which subset of sequences for given input list is to be
+#'   file, from which subset of sequences for given input feature is to be
 #'   retrieved. In the sequence header: only string before first space and/or
 #'   first colon (:) will be considered for futher processes. **Important
 #'   consideration when header have big names.
@@ -288,5 +288,75 @@ get_flank_from_feature <- function(feature_file,fasta_file,width=10,flank_type=1
 
           Biostrings::writeXStringSet(flank_seq,filepath=paste(outfile, ".fa",sep=""),append=FALSE,format="fasta" )
           rtracklayer::export.bed(object = flank_region,paste(outfile, ".bed",sep=""))
+
+}
+
+#' get_random_sequences_from_fasta
+#'
+#' @description Generate n-random sequences of pre-determined length from given input multi-fasta file
+#'
+#' @param fasta_file Either a path or a connection to reference multi-fasta
+#'   file, from which random sequences need to be generated. In the sequence header: only string before first space and/or
+#'   first colon (:) will be considered for futher processes. **Important
+#'   consideration when header have big names.
+#' @param numberOfRandomSequences Numeric, number of random sequences to be generated.
+#' @param lengthOfRandomSequence Numeric, length of random sequences.
+#' @param outfile A character vector, determining outfile name, \code{default:
+#'   randomSeq }
+#'
+#' @return A bedfile of random regions and fasta file containing random sequences.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'
+#' fasta_file <- "S288C_reference_sequence_R64-2-1_20150113.fa"
+#'
+#' get_random_sequences_from_fasta(fasta_file = fasta_file, numberOfRandomSequences = 100, lengthOfRandomSequence = 500, outfile = "Sc_randomSeq")
+#'
+#' }
+#'
+get_random_sequences_from_fasta <- function(fasta_file, numberOfRandomSequences=50, lengthOfRandomSequence=100, outfile="randomSeq"){
+
+          genome.fa <- Biostrings::readDNAStringSet(fasta_file)
+
+          chr_size <- width(genome.fa)
+          names(chr_size) <- names(genome.fa)
+
+          span <- 4
+
+          #initialise some vectors for storing random coordinates
+          my_random_start  <- vector()
+          my_random_end    <- vector()
+          my_random_chr    <- vector()
+          my_random_strand <- vector()
+
+          set.seed(12345)
+
+          #loop through number of regions
+          for(i in 1:numberOfRandomSequences){
+
+                    my_random_chr[i] <- sample(x=names(genome.fa),size=1)
+                    my_random_strand[i] <- sample(x=c('-','+'),size=1)
+                    my_max <- chr_size[[my_random_chr[i]]]-span
+                    my_random_start[i] <- runif(n=1, min=1, max=my_max)
+                    my_random_end[i] <- my_random_start[i] + lengthOfRandomSequence
+          }
+
+          df <- data.frame(chr=my_random_chr,
+                           start=round(my_random_start),
+                           end=round(my_random_end),
+                           strand=my_random_strand,
+                           names=paste("random_seq", seq(1,numberOfRandomSequences, by=1), sep="_"))
+
+          bedfile <- GenomicRanges::makeGRangesFromDataFrame(df,keep.extra.columns = TRUE)
+
+          random_seq = BSgenome::getSeq(genome.fa,bedfile)
+
+          names(random_seq) <- bedfile$names
+
+          Biostrings::writeXStringSet(random_seq,filepath=paste(outfile, ".fa",sep=""),append=FALSE,format="fasta")
+
+          rtracklayer::export.bed(object=bedfile,paste(outfile,".bed",sep=""))
 
 }

@@ -12,7 +12,7 @@ file, file format should be standard UCSC bed format with column:
 \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand}}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
-file, from which subset of sequences for given input list is to be
+file, from which subset of sequences for given input feature is to be
 retrieved.
 In the sequence header: only string before first space and/or first colon (:)
 will be considered for futher processes.
