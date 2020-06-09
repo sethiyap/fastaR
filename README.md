@@ -26,10 +26,12 @@ file `(.fa or .fasta)`.
 ## Install
 
     if(require("devtools")){
-            devtools::install_github("sethiyap/fastaR")
+            options(repos = BiocManager::repositories())
+            devtools::install_github("sethiyap/fastaR",build = FALSE)
     } else{
+            options(repos = BiocManager::repositories())
             install.packages("devtools")
-            devtools::install_github("sethiyap/fastaR")
+            devtools::install_github("sethiyap/fastaR", build = FALSE)
     }
 
 ## faUtils
