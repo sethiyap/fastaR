@@ -23,7 +23,7 @@ Get size (in bp) for each sequence in multi-fasta file.
 
  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
 
- fa_size(fasta_file=ref_fasta)
+ fastaR::fa_size(fasta_file=ref_fasta)
 
 }
 }

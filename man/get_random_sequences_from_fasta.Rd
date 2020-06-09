@@ -24,11 +24,11 @@ consideration when header have long names.}
 
 \item{lengthOfRandomSequence}{Numeric, length of random sequences.}
 
+\item{write_bed}{Logical, to return flank region as a output bed file, Default: FALSE}
+
 \item{write_outputfasta}{Logical, to return flank sequences as a output multi-fasta file, Default: FALSE}
 
 \item{outfile}{character vector, defining output file name, Default: 'flank_out'}
-
-\item{write_flankbed}{Logical, to return flank region as a output bed file, Default: FALSE}
 }
 \value{
 A ranges of random regions and respective random sequences.
@@ -41,7 +41,7 @@ Generate n-random sequences of pre-determined length from given input multi-fast
 
 ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
 
-get_random_sequences_from_fasta(fasta_file = ref_fasta,
+fastaR::get_random_sequences_from_fasta(fasta_file = ref_fasta,
                                 numberOfRandomSequences = 100,
                                 lengthOfRandomSequence = 500)
 

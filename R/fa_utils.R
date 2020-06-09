@@ -24,7 +24,7 @@
 #'  myGenelist <- scan(myGenelist,  what="character", sep=NULL)
 #'
 #'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
-#'  fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
+#'  fastaR::fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
 #'
 #' }
 fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
@@ -72,7 +72,7 @@ fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #'
 #'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
 #'
-#'  fa_size(fasta_file=ref_fasta)
+#'  fastaR::fa_size(fasta_file=ref_fasta)
 #'
 #' }
 fa_size <- function(fasta_file){
@@ -110,7 +110,7 @@ fa_size <- function(fasta_file){
 #' \dontrun{
 #'
 #'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
-#'  fa_summary(fasta_file=ref_fasta)
+#'  fastaR::fa_summary(fasta_file=ref_fasta)
 #' }
 fa_summary <- function(fasta_file){
 
@@ -156,7 +156,7 @@ fa_summary <- function(fasta_file){
 #' @examples
 #' \dontrun{
 #'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
-#'  fa_percent_GC(fasta_file=ref_fasta)
+#'  fastaR::fa_percent_GC(fasta_file=ref_fasta)
 #' }
 fa_percent_GC <- function(fasta_file){
 

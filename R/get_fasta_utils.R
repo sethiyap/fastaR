@@ -314,7 +314,7 @@ get_flank_from_feature <- function(feature_file,fasta_file,width=10,flank_type=1
 #'   consideration when header have long names.
 #' @param numberOfRandomSequences Numeric, number of random sequences to be generated.
 #' @param lengthOfRandomSequence Numeric, length of random sequences.
-#' @param write_flankbed Logical, to return flank region as a output bed file, Default: FALSE
+#' @param write_bed Logical, to return flank region as a output bed file, Default: FALSE
 #' @param write_outputfasta Logical, to return flank sequences as a output multi-fasta file, Default: FALSE
 #' @param outfile character vector, defining output file name, Default: 'flank_out'
 #' @return A ranges of random regions and respective random sequences.
@@ -330,7 +330,7 @@ get_flank_from_feature <- function(feature_file,fasta_file,width=10,flank_type=1
 #'
 #' ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
 #'
-#' get_random_sequences_from_fasta(fasta_file = ref_fasta,
+#' fastaR::get_random_sequences_from_fasta(fasta_file = ref_fasta,
 #'                                 numberOfRandomSequences = 100,
 #'                                 lengthOfRandomSequence = 500)
 #'

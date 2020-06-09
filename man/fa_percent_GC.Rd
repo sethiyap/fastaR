@@ -22,6 +22,6 @@ for given multi-fasta file get GC percent for each sequence
 \examples{
 \dontrun{
  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
- fa_percent_GC(fasta_file=ref_fasta)
+ fastaR::fa_percent_GC(fasta_file=ref_fasta)
 }
 }

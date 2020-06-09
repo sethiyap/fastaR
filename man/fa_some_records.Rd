@@ -32,7 +32,7 @@ Get fasta sequences of given input list from reference
  myGenelist <- scan(myGenelist,  what="character", sep=NULL)
 
  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
- fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
+ fastaR::fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
 
 }
 }

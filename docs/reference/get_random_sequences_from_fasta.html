@@ -146,16 +146,16 @@ consideration when header have long names.</p></td>
       <td><p>Numeric, length of random sequences.</p></td>
     </tr>
     <tr>
+      <th>write_bed</th>
+      <td><p>Logical, to return flank region as a output bed file, Default: FALSE</p></td>
+    </tr>
+    <tr>
       <th>write_outputfasta</th>
       <td><p>Logical, to return flank sequences as a output multi-fasta file, Default: FALSE</p></td>
     </tr>
     <tr>
       <th>outfile</th>
       <td><p>character vector, defining output file name, Default: 'flank_out'</p></td>
-    </tr>
-    <tr>
-      <th>write_flankbed</th>
-      <td><p>Logical, to return flank region as a output bed file, Default: FALSE</p></td>
     </tr>
     </table>
 
@@ -168,7 +168,7 @@ consideration when header have long names.</p></td>
 
 <span class='no'>ref_fasta</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"exdata"</span>, <span class='st'>"Sc_ref_genome.fasta"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"fastaR"</span>)
 
-<span class='fu'>get_random_sequences_from_fasta</span>(<span class='kw'>fasta_file</span> <span class='kw'>=</span> <span class='no'>ref_fasta</span>,
+<span class='kw pkg'>fastaR</span><span class='kw ns'>::</span><span class='fu'>get_random_sequences_from_fasta</span>(<span class='kw'>fasta_file</span> <span class='kw'>=</span> <span class='no'>ref_fasta</span>,
                                 <span class='kw'>numberOfRandomSequences</span> <span class='kw'>=</span> <span class='fl'>100</span>,
                                 <span class='kw'>lengthOfRandomSequence</span> <span class='kw'>=</span> <span class='fl'>500</span>)
 
