@@ -13,7 +13,7 @@ In the sequence header: only string before first space and/or first colon (:) wi
 **Important consideration when header have big names.}
 }
 \value{
-A output file of GC percent and a barplot of GC percent distribution
+A tibble of GC percent and a barplot of GC percent distribution
  \code{if the fasta file contains sequences less than 20}
 }
 \description{
@@ -21,7 +21,7 @@ for given multi-fasta file get GC percent for each sequence
 }
 \examples{
 \dontrun{
-
- fa_percent_GC(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+ ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+ fa_percent_GC(fasta_file=ref_fasta)
 }
 }

@@ -17,28 +17,150 @@ knitr::opts_chunk$set(
 
 # fastaR
 
-<!-- <!-- badges: start --> -->
-<!-- [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental) -->
-<!-- [![platform](https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen)](https://shields.io/category/platform-support) -->
-<!-- <!-- badges: end --> -->
+<!-- badges: start -->
+```{r , echo=FALSE , results='asis' , message=FALSE}
+cat(
+badger::badge_devel("sethiyap/fastaR" , color = "blue"),
+badger::badge_lifecycle()
+)
+```
+<!-- badges: end -->
 
-Fasta sequence manipulation is required while performing gene set or genome-wide analysis in RNASeq and ChIPSeq. Sequences of group of genes belonging to a pathway or biological term helps to determine the motifs/signature sequences associated with those genes. It also helps to predict regulators for differentially enriched genes. fastaR provides different ways to manipulate and gather information from the set of sequences. For instance, summary of input fasta file `(fa_summary)` or percentage of GC in given sequences `(fa_percent_GC)`. Additionally, gene list specific sequences `(fa_some_records)` or promoters for given genes can also be fetched `(get_promoter_from_feature)`. Together, fastaR provides easy way to analyze and manipulate sequences with minimal input of a feature file `(bed or gff)` and/or reference genome file `(.fa or .fasta)`. 
+Fasta sequence manipulation is required while performing gene set or genome-wide analysis in RNASeq and ChIPSeq. Sequences of group of genes belonging to a pathway or biological term helps to determine the motifs/signature sequences associated with those genes. It also helps to predict regulators for differentially enriched genes. 
+fastaR provides different ways to manipulate and gather information from the set of sequences. For instance, summary of input fasta file `(fa_summary)` or percentage of GC in given sequences `(fa_percent_GC)`. Additionally, gene list specific sequences `(fa_some_records)` or promoters for given genes can also be fetched `(get_promoter_from_feature)`. Together, fastaR provides easy way to analyze and manipulate sequences with minimal input of a feature file `(bed or gff)` and/or reference genome file `(.fa or .fasta)`. 
 
 ## Install
 
 ```
-devtools::install_github("sethiyap/fastaR")
+if(require("devtools")){
+        devtools::install_github("sethiyap/fastaR")
+} else{
+        install.packages("devtools")
+        devtools::install_github("sethiyap/fastaR")
+}
 ```
 
-### faUtils
+## faUtils
 
-- `fa_some_records()`
-- `fa_size()`
-- `fa_summary()`
-- `fa_percent_GC()`
+### fa_some_records()
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+# Input list of genes
+myGenelist <- system.file("exdata", "Sc_myGenelist.txt", package = "fastaR")
+myGenelist <- scan(myGenelist,  what="character", sep=NULL)
+head(myGenelist)
 
-### getUtils
-- `get_fasta_from_bed()`
-- `get_promoter_from_feature()`
-- `get_flank_from_feature()`
-- `get_random_sequences_from_fasta()`
+# Reference fasta sequence to be subsetted
+ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR",mustWork = TRUE)
+
+# Function
+fastaR::fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
+
+```
+
+### fa_size()
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+cc <- fastaR::fa_size(fasta_file=ref_fasta)
+head(cc)
+```
+
+### fa_summary()
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+
+ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+fs <- fastaR::fa_summary(fasta_file=ref_fasta)
+print(t(fs))
+
+```
+
+### fa_percent_GC()
+- for more than 20 sequences
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+ff <- fastaR::fa_percent_GC(fasta_file=ref_fasta)
+head(ff)
+```
+
+- for less than 20 sequences
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+ref_fasta <- system.file("exdata", "Sc_nucl_subset.fa", package = "fastaR")
+ft <- fastaR::fa_percent_GC(fasta_file=ref_fasta)
+head(ft)
+```
+
+## getUtils
+
+### get_fasta_from_bed()
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+
+# path to bed (.bed) file
+bed_file_in <- system.file("exdata","Sc_ref_genes.bed", package = "fastaR")
+
+# path to reference genome sequence
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+
+fastaR::get_fasta_from_bed(bedFile=bed_file_in, fasta_file=ref_fasta, write_output=FALSE)
+```
+
+
+### get_promoter_from_feature()
+```{r eval=TRUE, message=FALSE, warning=FALSE, message=FALSE, warning=FALSE}
+
+# path to reference sequence file
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+
+# for gff as feature file
+feature_file_in <- system.file("exdata","Sc_ref_genes.gff", package = "fastaR")
+pr <- fastaR::get_promoter_from_feature(feature_file=feature_file_in, fasta_file=ref_fasta, write_outputfasta= FALSE, write_promoterbed= FALSE, upstream_bp= 1000, downstream_bp= 100)
+pr
+
+# for bed as feature file
+feature_file_in <- system.file("exdata","Sc_ref_genes.bed", package = "fastaR")
+pr <- fastaR::get_promoter_from_feature(feature_file=feature_file_in, fasta_file=ref_fasta, write_outputfasta= FALSE, write_promoterbed= FALSE, upstream_bp= 1000, downstream_bp= 100)
+pr
+
+```
+
+### get_flank_from_feature()
+
+flanks are different region in gene's structure as illustrated below:
+       1. sequence upstream of start coordinate
+       2. sequence downstream of start coordinate
+       3. sequence downstream of end coordinate
+       4. upstream and downstream of start coordinate
+       5. upstream and downstream of end coordinate
+       6. upstream and downstream of feature/gene coordinates
+       7. middle region, i.e. distance (in bp) from start and end coordinate                            Start----->ATGCGGATGCGGTC<------End
+
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+
+# path to reference sequence file
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+
+# for gff as feature file
+
+feature_file_in <- system.file("exdata","Sc_ref_genes.gff", package = "fastaR")
+ss <- fastaR::get_flank_from_feature(feature_file = feature_file_in, fasta_file = ref_fasta, flank_type = 2)
+ss
+
+# for bed file as feature file
+
+feature_file_in <- system.file("exdata","Sc_ref_genes.bed", package = "fastaR")
+ss <- fastaR::get_flank_from_feature(feature_file = feature_file_in, fasta_file = ref_fasta, flank_type = 2)
+ss
+
+```
+
+### get_random_sequences_from_fasta()
+```{r eval=TRUE, message=FALSE, warning=FALSE}
+
+# load reference fasta
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+
+rr <- fastaR::get_random_sequences_from_fasta(fasta_file = ref_fasta,
+                                 numberOfRandomSequences = 100,
+                                 lengthOfRandomSequence = 500)
+
+rr
+
+```

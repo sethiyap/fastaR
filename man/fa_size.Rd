@@ -13,7 +13,7 @@ In the sequence header: only string before first space and/or first colon (:) wi
 **Important consideration when header have big names.}
 }
 \value{
-Tab delimited .size file
+A tibble of gene_id and gene length
 }
 \description{
 Get size (in bp) for each sequence in multi-fasta file.
@@ -21,7 +21,9 @@ Get size (in bp) for each sequence in multi-fasta file.
 \examples{
 \dontrun{
 
- fa_size(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+ ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+
+ fa_size(fasta_file=ref_fasta)
 
 }
 }

@@ -8,24 +8,30 @@ get_random_sequences_from_fasta(
   fasta_file,
   numberOfRandomSequences = 50,
   lengthOfRandomSequence = 100,
+  write_bed = FALSE,
+  write_outputfasta = FALSE,
   outfile = "randomSeq"
 )
 }
 \arguments{
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
-file, from which random sequences need to be generated. In the sequence header: only string before first space and/or
-first colon (:) will be considered for futher processes. **Important
-consideration when header have big names.}
+file, from which subset of sequences for given input feature is to be
+retrieved. In the sequence header: only string before first space and/or
+first colon (:) will be considered for further processes. **Important
+consideration when header have long names.}
 
 \item{numberOfRandomSequences}{Numeric, number of random sequences to be generated.}
 
 \item{lengthOfRandomSequence}{Numeric, length of random sequences.}
 
-\item{outfile}{A character vector, determining outfile name, \code{default:
-randomSeq }}
+\item{write_outputfasta}{Logical, to return flank sequences as a output multi-fasta file, Default: FALSE}
+
+\item{outfile}{character vector, defining output file name, Default: 'flank_out'}
+
+\item{write_flankbed}{Logical, to return flank region as a output bed file, Default: FALSE}
 }
 \value{
-A bedfile of random regions and fasta file containing random sequences.
+A ranges of random regions and respective random sequences.
 }
 \description{
 Generate n-random sequences of pre-determined length from given input multi-fasta file
@@ -33,9 +39,11 @@ Generate n-random sequences of pre-determined length from given input multi-fast
 \examples{
 \dontrun{
 
-fasta_file <- "S288C_reference_sequence_R64-2-1_20150113.fa"
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
 
-get_random_sequences_from_fasta(fasta_file = fasta_file, numberOfRandomSequences = 100, lengthOfRandomSequence = 500, outfile = "Sc_randomSeq")
+get_random_sequences_from_fasta(fasta_file = ref_fasta,
+                                numberOfRandomSequences = 100,
+                                lengthOfRandomSequence = 500)
 
 }
 

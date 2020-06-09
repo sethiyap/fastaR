@@ -2,26 +2,27 @@
 % Please edit documentation in R/get_fasta_utils.R
 \name{get_fasta_from_bed}
 \alias{get_fasta_from_bed}
-\title{get fasta sequences for bed file}
+\title{get fasta sequences from bed file}
 \usage{
-get_fasta_from_bed(bedFile, fasta_file, outfile = "out")
+get_fasta_from_bed(bedFile, fasta_file, write_output = FALSE)
 }
 \arguments{
-\item{bedFile}{A character vector containing path to the file to the bed
+\item{bedFile}{Either a path or a connection to the bed
 file, file format should be standard UCSC bed format with column:
-\code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand}}
+\code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand}
+** The file should be without column names.}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input feature is to be
 retrieved.
 In the sequence header: only string before first space and/or first colon (:)
-will be considered for futher processes.
-**Important consideration when header have big names.}
+will be considered for further processes.
+**Important consideration when header have long names.}
 
-\item{outfile}{A character vector, determining outfile name, default: out}
+\item{outfile}{Logical, to return output sequences as a output multi-fasta file or not, default: FALSE}
 }
 \value{
-A output fasta file of sequences in given bed region
+sequences in given bed region
 }
 \description{
 Extracts sequences from a fasta file for each of the intervals defined in a BED file
@@ -29,9 +30,9 @@ Extracts sequences from a fasta file for each of the intervals defined in a BED 
 \examples{
 \dontrun{
 
-get_fasta_from_bed(bedFile="Sc_orf_coding_R64-2-1.bed",
-fasta_file="S288C_reference_sequence_R64-2-1_20150113.fa",
-outfile="Sc_subset")
+bed_file_in <- system.file("exdata","Sc_ref_genes.bed", package = "fastaR")
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+fastaR::get_fasta_from_bed(bedFile=bed_file_in, fasta_file=ref_fasta, write_output=FALSE)
 
 }
 }

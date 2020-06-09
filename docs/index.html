@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fasta Sequence Manipulation • fastaR</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Fasta Sequence Manipulation">
 <meta property="og:description" content="Allows biologists to easily manipulate fasta sequences like those of proteins or genome to perform specific analysis.    This broadly have applications like subsetting set of sequences from big fasta file or summarizing sequences in given fasta file based on length, %GC etc. ">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -47,7 +47,14 @@
   <a href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/sethiyap/fastaR/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -62,39 +69,337 @@
 <div id="fastar" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#fastar" class="anchor"></a>fastaR</h1></div>
-<!-- <!-- badges: start -->
+<!-- badges: start -->
 
 <p>Fasta sequence manipulation is required while performing gene set or genome-wide analysis in RNASeq and ChIPSeq. Sequences of group of genes belonging to a pathway or biological term helps to determine the motifs/signature sequences associated with those genes. It also helps to predict regulators for differentially enriched genes. fastaR provides different ways to manipulate and gather information from the set of sequences. For instance, summary of input fasta file <code>(fa_summary)</code> or percentage of GC in given sequences <code>(fa_percent_GC)</code>. Additionally, gene list specific sequences <code>(fa_some_records)</code> or promoters for given genes can also be fetched <code>(get_promoter_from_feature)</code>. Together, fastaR provides easy way to analyze and manipulate sequences with minimal input of a feature file <code>(bed or gff)</code> and/or reference genome file <code>(.fa or .fasta)</code>.</p>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"sethiyap/fastaR"</span>)</a></code></pre></div>
-<div id="fautils" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fautils" class="anchor"></a>faUtils</h3>
-<ul>
-<li><code><a href="reference/fa_some_records.html">fa_some_records()</a></code></li>
-<li><code><a href="reference/fa_size.html">fa_size()</a></code></li>
-<li><code><a href="reference/fa_summary.html">fa_summary()</a></code></li>
-<li><code><a href="reference/fa_percent_GC.html">fa_percent_GC()</a></code></li>
-</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="cf">if</span>(<span class="kw">require</span>(<span class="st">"devtools"</span>)){</span>
+<span id="cb1-2"><a href="#cb1-2"></a>        devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"sethiyap/fastaR"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>} <span class="cf">else</span>{</span>
+<span id="cb1-4"><a href="#cb1-4"></a>        <span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>        devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"sethiyap/fastaR"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>}</span></code></pre></div>
 </div>
-<div id="getutils" class="section level3">
+<div id="fautils" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fautils" class="anchor"></a>faUtils</h2>
+<div id="fa_some_records" class="section level3">
 <h3 class="hasAnchor">
-<a href="#getutils" class="anchor"></a>getUtils</h3>
+<a href="#fa_some_records" class="anchor"></a>fa_some_records()</h3>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># Input list of genes</span>
+<span class="no">myGenelist</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_myGenelist.txt"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">myGenelist</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/scan.html">scan</a></span>(<span class="no">myGenelist</span>,  <span class="kw">what</span><span class="kw">=</span><span class="st">"character"</span>, <span class="kw">sep</span><span class="kw">=</span><span class="kw">NULL</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">myGenelist</span>)
+<span class="co">#&gt; [1] "YDR343C" "YPL122C" "YCL066W" "YKR014C" "YHL018W" "YDR175C"</span>
+
+<span class="co"># Reference fasta sequence to be subsetted</span>
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_nucl_R64-2-1.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>,<span class="kw">mustWork</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+
+<span class="co"># Function</span>
+<span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/fa_some_records.html">fa_some_records</a></span>(<span class="kw">gene_list</span><span class="kw">=</span><span class="no">myGenelist</span>, <span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>, <span class="kw">outfile</span><span class="kw">=</span><span class="st">"sc_myGenelist.fa"</span>)
+<span class="co">#&gt;   A BStringSet instance of length 0</span></pre></div>
+</div>
+<div id="fa_size" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fa_size" class="anchor"></a>fa_size()</h3>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_nucl_R64-2-1.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">cc</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/fa_size.html">fa_size</a></span>(<span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">cc</span>)
+<span class="co">#&gt; # A tibble: 6 x 2</span>
+<span class="co">#&gt;   Seq_id  Length</span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;</span>
+<span class="co">#&gt; 1 YAL001C   3483</span>
+<span class="co">#&gt; 2 YAL002W   3825</span>
+<span class="co">#&gt; 3 YAL003W    621</span>
+<span class="co">#&gt; 4 YAL004W    648</span>
+<span class="co">#&gt; 5 YAL005C   1929</span>
+<span class="co">#&gt; 6 YAL007C    648</span></pre></div>
+</div>
+<div id="fa_summary" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fa_summary" class="anchor"></a>fa_summary()</h3>
+<div class="sourceCode" id="cb4"><pre class="r">
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_nucl_R64-2-1.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">fs</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/fa_summary.html">fa_summary</a></span>(<span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">fs</span>))
+<span class="co">#&gt;               [,1]</span>
+<span class="co">#&gt; num_of_seq   25.00</span>
+<span class="co">#&gt; min         186.00</span>
+<span class="co">#&gt; max        4071.00</span>
+<span class="co">#&gt; mean       1604.64</span>
+<span class="co">#&gt; median     1218.00</span>
+<span class="co">#&gt; percent_gc   39.86</span></pre></div>
+</div>
+<div id="fa_percent_gc" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fa_percent_gc" class="anchor"></a>fa_percent_GC()</h3>
 <ul>
-<li><code><a href="reference/get_fasta_from_bed.html">get_fasta_from_bed()</a></code></li>
-<li><code><a href="reference/get_promoter_from_feature.html">get_promoter_from_feature()</a></code></li>
-<li><code><a href="reference/get_flank_from_feature.html">get_flank_from_feature()</a></code></li>
-<li><code><a href="reference/get_random_sequences_from_fasta.html">get_random_sequences_from_fasta()</a></code></li>
+<li>for more than 20 sequences</li>
 </ul>
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="r"><span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_nucl_R64-2-1.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">ff</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/fa_percent_GC.html">fa_percent_GC</a></span>(<span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ff</span>)
+<span class="co">#&gt; # A tibble: 6 x 2</span>
+<span class="co">#&gt;   names   percent_gc</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 YAL001C       37.1</span>
+<span class="co">#&gt; 2 YAL002W       37.2</span>
+<span class="co">#&gt; 3 YAL003W       44.6</span>
+<span class="co">#&gt; 4 YAL004W       44.9</span>
+<span class="co">#&gt; 5 YAL005C       44.1</span>
+<span class="co">#&gt; 6 YAL007C       37.0</span></pre></div>
+<ul>
+<li>for less than 20 sequences</li>
+</ul>
+<!-- end list --><div class="sourceCode" id="cb6"><pre class="r"><span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_nucl_subset.fa"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">ft</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/fa_percent_GC.html">fa_percent_GC</a></span>(<span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>)</pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ft</span>)
+<span class="co">#&gt; # A tibble: 6 x 2</span>
+<span class="co">#&gt;   names   percent_gc</span>
+<span class="co">#&gt;   &lt;chr&gt;        &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 YAL004W       44.9</span>
+<span class="co">#&gt; 2 YAL005C       44.1</span>
+<span class="co">#&gt; 3 YAL007C       37.0</span>
+<span class="co">#&gt; 4 YAL008W       38.9</span>
+<span class="co">#&gt; 5 YAL009W       41.4</span>
+<span class="co">#&gt; 6 YAL010C       36.7</span></pre></div>
+</div>
+</div>
+<div id="getutils" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getutils" class="anchor"></a>getUtils</h2>
+<div id="get_fasta_from_bed" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get_fasta_from_bed" class="anchor"></a>get_fasta_from_bed()</h3>
+<div class="sourceCode" id="cb8"><pre class="r">
+<span class="co"># path to bed (.bed) file</span>
+<span class="no">bed_file_in</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>,<span class="st">"Sc_ref_genes.bed"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+
+<span class="co"># path to reference genome sequence</span>
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_ref_genome.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+
+<span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_fasta_from_bed.html">get_fasta_from_bed</a></span>(<span class="kw">bedFile</span><span class="kw">=</span><span class="no">bed_file_in</span>, <span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>, <span class="kw">write_output</span><span class="kw">=</span><span class="fl">FALSE</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 2 metadata columns:</span>
+<span class="co">#&gt;       seqnames      ranges strand |        name     score</span>
+<span class="co">#&gt;          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;numeric&gt;</span>
+<span class="co">#&gt;   [1]     chrI     336-649      + |     YAL069W      &lt;NA&gt;</span>
+<span class="co">#&gt;   [2]     chrI     539-792      + |   YAL068W-A      &lt;NA&gt;</span>
+<span class="co">#&gt;   [3]     chrI   1808-2169      - |     YAL068C      &lt;NA&gt;</span>
+<span class="co">#&gt;   [4]     chrI   2481-2707      + |   YAL067W-A      &lt;NA&gt;</span>
+<span class="co">#&gt;   [5]     chrI   7236-9016      - |     YAL067C      &lt;NA&gt;</span>
+<span class="co">#&gt;   [6]     chrI 10092-10399      + |     YAL066W      &lt;NA&gt;</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 573</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]   314 TGATCGTAAATAACACACACGT...GGCGGTCCCAAATATTGTATAA YAL069W</span>
+<span class="co">#&gt;   [2]   254 TGCACGGCACTTGCCTCAGCGG...ACTTTTCAACAATAATACATAA YAL068W-A</span>
+<span class="co">#&gt;   [3]   362 ATGGTCAAATTAACTTCAATCG...GTATCTACACTATCGCAAACTA YAL068C</span>
+<span class="co">#&gt;   [4]   227 TGCCAATTATAGGGGTGCCGAG...GTTGGGAGTCGTATACTGTTAG YAL067W-A</span>
+<span class="co">#&gt;   [5]  1781 ATGTATTCAATTGTTAAAGAGA...TATCAGTATCTGATGAAAAATA YAL067C</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt; [569]   221 ATGGAACTTTTTATACCTTGCC...GGTCCGCGAAAACTTCCGGATA YBR298C-A</span>
+<span class="co">#&gt; [570]  1754 TGACTATTTCTGATCATCCAGA...TAGAATCTACCTCGTCAAATAA YBR299W</span>
+<span class="co">#&gt; [571]   497 ATGGCGGCAACACCAGCAGCGA...GCCACCTAATCTTTGTGCTCTA YBR300C</span>
+<span class="co">#&gt; [572]   362 TGGTCAAACTAACTTCAATCGC...TATCTACACTATCGCAAACTAG YBR301W</span>
+<span class="co">#&gt; [573]  1139 ATGAAAGAGAATGAACTTAAAA...GCAGTGAGGTGCTCTTAGTGTA YBR302C</span></pre></div>
+</div>
+<div id="get_promoter_from_feature" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get_promoter_from_feature" class="anchor"></a>get_promoter_from_feature()</h3>
+<div class="sourceCode" id="cb9"><pre class="r">
+<span class="co"># path to reference sequence file</span>
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_ref_genome.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+
+<span class="co"># for gff as feature file</span>
+<span class="no">feature_file_in</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>,<span class="st">"Sc_ref_genes.gff"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">pr</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_promoter_from_feature.html">get_promoter_from_feature</a></span>(<span class="kw">feature_file</span><span class="kw">=</span><span class="no">feature_file_in</span>, <span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>, <span class="kw">write_outputfasta</span><span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">write_promoterbed</span><span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">upstream_bp</span><span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">downstream_bp</span><span class="kw">=</span> <span class="fl">100</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 1 metadata column:</span>
+<span class="co">#&gt;       seqnames        ranges strand |       names</span>
+<span class="co">#&gt;          &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="co">#&gt;   [1]     chrI 151067-152166      - |     YAL001C</span>
+<span class="co">#&gt;   [2]     chrI 142707-143806      + |     YAL002W</span>
+<span class="co">#&gt;   [3]     chrI 141174-142273      + |     YAL003W</span>
+<span class="co">#&gt;   [4]     chrI 139760-140859      + |     YAL004W</span>
+<span class="co">#&gt;   [5]     chrI 141332-142431      - |     YAL005C</span>
+<span class="co">#&gt;   [6]     chrI 138246-139345      - |     YAL007C</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="no">pr</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 581</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]  1100 ACTTGTAAATATATCTTTTATT...ATGTCTCATTCTCCTTTTCGGC YAL001C</span>
+<span class="co">#&gt;   [2]  1100 TTCCAAGGCCGATGAATTCGAC...GAATTTAGATCGTATACCCAAT YAL002W</span>
+<span class="co">#&gt;   [3]  1100 CTTCATGTCAGCCTGCACTTCT...GGGTATGTTCCGATTTAGTTTA YAL003W</span>
+<span class="co">#&gt;   [4]  1100 CCAATTTGTCACCAGCTTCAGA...ACCCAAGTCGAAAATCAAGACG YAL004W</span>
+<span class="co">#&gt;   [5]  1100 CACTCATATCGGGGGTCTTACT...ATTGCCAACGATCAAGGTAACA YAL005C</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt; [577]  1100 GTGCGTGAAGGAGAAAACTTCG...TTACGTTGTTTGTATCATCCCA YBR298C-A</span>
+<span class="co">#&gt; [578]  1100 TTCTTACCTTGCTCCTCCATCT...TTTAAAGACTCCAATAACGATG YBR299W</span>
+<span class="co">#&gt; [579]  1100 CATGGCGTGGCTTGCTCCACAC...ACAAGAAATAGTGAAATGAAAG YBR300C</span>
+<span class="co">#&gt; [580]  1100 AAGAAAAACACATGACCAGAAT...TCTGACGAAAGAGTCAACTTGG YBR301W</span>
+<span class="co">#&gt; [581]  1100 AATTTATATACACTTATGCCAA...CTACCTCAAGATCTTTTCAGAA YBR302C</span>
+
+<span class="co"># for bed as feature file</span>
+<span class="no">feature_file_in</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>,<span class="st">"Sc_ref_genes.bed"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">pr</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_promoter_from_feature.html">get_promoter_from_feature</a></span>(<span class="kw">feature_file</span><span class="kw">=</span><span class="no">feature_file_in</span>, <span class="kw">fasta_file</span><span class="kw">=</span><span class="no">ref_fasta</span>, <span class="kw">write_outputfasta</span><span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">write_promoterbed</span><span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">upstream_bp</span><span class="kw">=</span> <span class="fl">1000</span>, <span class="kw">downstream_bp</span><span class="kw">=</span> <span class="fl">100</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 1 metadata column:</span>
+<span class="co">#&gt;       seqnames     ranges strand |       names</span>
+<span class="co">#&gt;          &lt;Rle&gt;  &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="co">#&gt;   [1]     chrI      1-435      + |     YAL069W</span>
+<span class="co">#&gt;   [2]     chrI      1-638      + |   YAL068W-A</span>
+<span class="co">#&gt;   [3]     chrI  2070-3169      - |     YAL068C</span>
+<span class="co">#&gt;   [4]     chrI  1481-2580      + |   YAL067W-A</span>
+<span class="co">#&gt;   [5]     chrI 8917-10016      - |     YAL067C</span>
+<span class="co">#&gt;   [6]     chrI 9092-10191      + |     YAL066W</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="no">pr</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 573</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]   435 CCACACCACACCCACACACCCA...CTGATTTTACGTACGCACACGG YAL069W</span>
+<span class="co">#&gt;   [2]   638 CCACACCACACCCACACACCCA...ATATCTCATTCGGCGGTCCCAA YAL068W-A</span>
+<span class="co">#&gt;   [3]  1100 CATCCAAGAATTTTATCTACGA...TCTGACGAAAGAGTCAACTTGG YAL068C</span>
+<span class="co">#&gt;   [4]  1100 AACGAAGCAGCGACTCATTTTT...ATATCCGAATTTTAGATTTGGA YAL067W-A</span>
+<span class="co">#&gt;   [5]  1100 TATATCCGATTCATTCTTCTTT...GTGGAAGACCTGCCAGATGACT YAL067C</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt; [569]  1100 GTGCGTGAAGGAGAAAACTTCG...TTACGTTGTTTGTATCATCCCA YBR298C-A</span>
+<span class="co">#&gt; [570]  1100 TCTTACCTTGCTCCTCCATCTC...TTAAAGACTCCAATAACGATGG YBR299W</span>
+<span class="co">#&gt; [571]  1100 CATGGCGTGGCTTGCTCCACAC...ACAAGAAATAGTGAAATGAAAG YBR300C</span>
+<span class="co">#&gt; [572]  1100 AGAAAAACACATGACCAGAATG...CTGACGAAAGAGTCAACTTGGT YBR301W</span>
+<span class="co">#&gt; [573]  1100 AATTTATATACACTTATGCCAA...CTACCTCAAGATCTTTTCAGAA YBR302C</span></pre></div>
+</div>
+<div id="get_flank_from_feature" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get_flank_from_feature" class="anchor"></a>get_flank_from_feature()</h3>
+<p>flanks are different region in gene’s structure as illustrated below: 1. sequence upstream of start coordinate 2. sequence downstream of start coordinate 3. sequence downstream of end coordinate 4. upstream and downstream of start coordinate 5. upstream and downstream of end coordinate 6. upstream and downstream of feature/gene coordinates 7. middle region, i.e. distance (in bp) from start and end coordinate Start—–&gt;ATGCGGATGCGGTC&lt;——End</p>
+<div class="sourceCode" id="cb10"><pre class="r">
+<span class="co"># path to reference sequence file</span>
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_ref_genome.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+
+<span class="co"># for gff as feature file</span>
+
+<span class="no">feature_file_in</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>,<span class="st">"Sc_ref_genes.gff"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_flank_from_feature.html">get_flank_from_feature</a></span>(<span class="kw">feature_file</span> <span class="kw">=</span> <span class="no">feature_file_in</span>, <span class="kw">fasta_file</span> <span class="kw">=</span> <span class="no">ref_fasta</span>, <span class="kw">flank_type</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 1 metadata column:</span>
+<span class="co">#&gt;       seqnames        ranges strand |     gene_id</span>
+<span class="co">#&gt;          &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt;</span>
+<span class="co">#&gt;   [1]     chrI 151157-151166      - |     YAL001C</span>
+<span class="co">#&gt;   [2]     chrI 143707-143716      + |     YAL002W</span>
+<span class="co">#&gt;   [3]     chrI 142174-142183      + |     YAL003W</span>
+<span class="co">#&gt;   [4]     chrI 140760-140769      + |     YAL004W</span>
+<span class="co">#&gt;   [5]     chrI 141422-141431      - |     YAL005C</span>
+<span class="co">#&gt;   [6]     chrI 138336-138345      - |     YAL007C</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="no">ss</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 581</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]    10 ATGGTACTGA                                      YAL001C</span>
+<span class="co">#&gt;   [2]    10 ATGGAGCAAA                                      YAL002W</span>
+<span class="co">#&gt;   [3]    10 ATGGCATCCA                                      YAL003W</span>
+<span class="co">#&gt;   [4]    10 ATGGGTGTCA                                      YAL004W</span>
+<span class="co">#&gt;   [5]    10 ATGTCAAAAG                                      YAL005C</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt; [577]    10 ATGGAACTTT                                      YBR298C-A</span>
+<span class="co">#&gt; [578]    10 ATGACTATTT                                      YBR299W</span>
+<span class="co">#&gt; [579]    10 ATGGCGGCAA                                      YBR300C</span>
+<span class="co">#&gt; [580]    10 ATGGTCAAAC                                      YBR301W</span>
+<span class="co">#&gt; [581]    10 ATGAAAGAGA                                      YBR302C</span>
+
+<span class="co"># for bed file as feature file</span>
+
+<span class="no">feature_file_in</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>,<span class="st">"Sc_ref_genes.bed"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_flank_from_feature.html">get_flank_from_feature</a></span>(<span class="kw">feature_file</span> <span class="kw">=</span> <span class="no">feature_file_in</span>, <span class="kw">fasta_file</span> <span class="kw">=</span> <span class="no">ref_fasta</span>, <span class="kw">flank_type</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 2 metadata columns:</span>
+<span class="co">#&gt;       seqnames      ranges strand |        name     score</span>
+<span class="co">#&gt;          &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;numeric&gt;</span>
+<span class="co">#&gt;   [1]     chrI     336-345      + |     YAL069W      &lt;NA&gt;</span>
+<span class="co">#&gt;   [2]     chrI     539-548      + |   YAL068W-A      &lt;NA&gt;</span>
+<span class="co">#&gt;   [3]     chrI   2160-2169      - |     YAL068C      &lt;NA&gt;</span>
+<span class="co">#&gt;   [4]     chrI   2481-2490      + |   YAL067W-A      &lt;NA&gt;</span>
+<span class="co">#&gt;   [5]     chrI   9007-9016      - |     YAL067C      &lt;NA&gt;</span>
+<span class="co">#&gt;   [6]     chrI 10092-10101      + |     YAL066W      &lt;NA&gt;</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+<span class="no">ss</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 573</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]    10 TGATCGTAAA                                      YAL069W</span>
+<span class="co">#&gt;   [2]    10 TGCACGGCAC                                      YAL068W-A</span>
+<span class="co">#&gt;   [3]    10 ATGGTCAAAT                                      YAL068C</span>
+<span class="co">#&gt;   [4]    10 TGCCAATTAT                                      YAL067W-A</span>
+<span class="co">#&gt;   [5]    10 ATGTATTCAA                                      YAL067C</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt; [569]    10 ATGGAACTTT                                      YBR298C-A</span>
+<span class="co">#&gt; [570]    10 TGACTATTTC                                      YBR299W</span>
+<span class="co">#&gt; [571]    10 ATGGCGGCAA                                      YBR300C</span>
+<span class="co">#&gt; [572]    10 TGGTCAAACT                                      YBR301W</span>
+<span class="co">#&gt; [573]    10 ATGAAAGAGA                                      YBR302C</span></pre></div>
+</div>
+<div id="get_random_sequences_from_fasta" class="section level3">
+<h3 class="hasAnchor">
+<a href="#get_random_sequences_from_fasta" class="anchor"></a>get_random_sequences_from_fasta()</h3>
+<div class="sourceCode" id="cb11"><pre class="r">
+<span class="co"># load reference fasta</span>
+<span class="no">ref_fasta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"exdata"</span>, <span class="st">"Sc_ref_genome.fasta"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"fastaR"</span>)
+
+<span class="no">rr</span> <span class="kw">&lt;-</span> <span class="kw pkg">fastaR</span><span class="kw ns">::</span><span class="fu"><a href="reference/get_random_sequences_from_fasta.html">get_random_sequences_from_fasta</a></span>(<span class="kw">fasta_file</span> <span class="kw">=</span> <span class="no">ref_fasta</span>,
+                                 <span class="kw">numberOfRandomSequences</span> <span class="kw">=</span> <span class="fl">100</span>,
+                                 <span class="kw">lengthOfRandomSequence</span> <span class="kw">=</span> <span class="fl">500</span>)
+<span class="co">#&gt; GRanges object with 6 ranges and 1 metadata column:</span>
+<span class="co">#&gt;                                                                                    seqnames</span>
+<span class="co">#&gt;                                                                                       &lt;Rle&gt;</span>
+<span class="co">#&gt;   [1] chrII [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=II]</span>
+<span class="co">#&gt;   [2] chrII [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=II]</span>
+<span class="co">#&gt;   [3] chrII [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=II]</span>
+<span class="co">#&gt;   [4] chrII [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=II]</span>
+<span class="co">#&gt;   [5] chrII [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=II]</span>
+<span class="co">#&gt;   [6]   chrI [org=Saccharomyces cerevisiae] [strain=S288C] [moltype=genomic] [chromosome=I]</span>
+<span class="co">#&gt;              ranges strand |        names</span>
+<span class="co">#&gt;           &lt;IRanges&gt;  &lt;Rle&gt; |     &lt;factor&gt;</span>
+<span class="co">#&gt;   [1] 618816-619316      - | random_seq_1</span>
+<span class="co">#&gt;   [2] 135291-135791      + | random_seq_2</span>
+<span class="co">#&gt;   [3] 591756-592256      - | random_seq_3</span>
+<span class="co">#&gt;   [4] 123908-124408      + | random_seq_4</span>
+<span class="co">#&gt;   [5] 318119-318619      - | random_seq_5</span>
+<span class="co">#&gt;   [6]   92658-93158      + | random_seq_6</span>
+<span class="co">#&gt;   -------</span>
+<span class="co">#&gt;   seqinfo: 2 sequences from an unspecified genome; no seqlengths</span>
+
+<span class="no">rr</span>
+<span class="co">#&gt;   A DNAStringSet instance of length 100</span>
+<span class="co">#&gt;       width seq                                             names               </span>
+<span class="co">#&gt;   [1]   501 AGTTCCTTTTGCCTTGCCGGCT...TTATACAGCCGTGCAACACCGT random_seq_1</span>
+<span class="co">#&gt;   [2]   501 TGTTCTTCCATAAATTGGAAAC...ATTTTCTTGTTTGGTTTTTATT random_seq_2</span>
+<span class="co">#&gt;   [3]   501 ACGACAAACAAGGTTTCCCAAT...TTGTCTGAAAGAAAGGCTGAAA random_seq_3</span>
+<span class="co">#&gt;   [4]   501 AGGCGCATAAAATCTCTCAGTG...AAATACCGTTATCAAAGTGGTA random_seq_4</span>
+<span class="co">#&gt;   [5]   501 ATAAGTTTCAATATACGTAAAG...TTCTGGAGCTTTGTTACATTGC random_seq_5</span>
+<span class="co">#&gt;   ...   ... ...</span>
+<span class="co">#&gt;  [96]   501 TTCATTTTTTGATATTCTCTTC...TTCCCAAATGATTAATATTAAT random_seq_96</span>
+<span class="co">#&gt;  [97]   501 AGAAGTTGACCCCAACATATCT...ACCCATTTAAAGAACTCCCACC random_seq_97</span>
+<span class="co">#&gt;  [98]   501 GCTTTCCAGTCATATAATCTAT...TTTGGCAACTTCATGCACATGT random_seq_98</span>
+<span class="co">#&gt;  [99]   501 CCGCAGGAAGGACCCCTCTCTG...CAGGATGGTCACGGTGCCATTC random_seq_99</span>
+<span class="co">#&gt; [100]   501 ATATATTAACTGTCCATGAAGA...GGCTCTTTTAGTTCCAAGGCCT random_seq_100</span></pre></div>
 </div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div class="license">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Browse source code at <br><a href="https://github.com/sethiyap/fastaR/">https://​github.com/​sethiyap/​fastaR/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/sethiyap/fastaR/issues">https://​github.com/​sethiyap/​fastaR/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="https://opensource.org/licenses/mit-license.php">MIT</a></li>
@@ -103,15 +408,15 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Pooja Sethiya <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Pooja Sethiya <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://shields.io/category/platform-support"><embed src="https://img.shields.io/badge/R-%3E%20v3.5.1-brightgreen"></embed></a></li>
+<li><a href="https://github.com/sethiyap/fastaR"><img src="https://img.shields.io/badge/devel%20version-0.1.0-blue.svg"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
 </ul>
 </div>
 </div>
@@ -123,7 +428,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

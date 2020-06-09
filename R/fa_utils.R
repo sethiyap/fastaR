@@ -2,15 +2,17 @@
 #'
 #' @description Get fasta sequences of given input list from reference
 #'   multi-fasta file.
-#' @param gene_list A charcater vector of gene names; present in multi-fasta
-#'   file
+#' @param gene_list A charcter vector of gene names or gene ids;
+#' the gene names or gene ids should exactly match with sequence
+#' headers present in multi-fasta file
 #' @param fasta_file Either a path or a connection to reference multi-fasta
 #'   file, from which subset of sequences for given input list is to be
 #'   retrieved.
 #' @param outfile A character vector containing the path to the file to write
 #'   output
-#' @importFrom Biostrings readDNAStringSet
-#' @importFrom Biostrings writeXStringSet
+#' @importFrom Biostrings readBStringSet writeXStringSet
+#' @importFrom tidyr tibble
+#' @importFrom dplyr mutate
 #' @import magrittr
 #' @return A multi-fasta file, containing sequences of given input list id's.
 #' @export
@@ -18,9 +20,11 @@
 #' @examples
 #' \dontrun{
 #'
-#'  myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
+#'  myGenelist <- system.file("exdata", "Sc_myGenelist.txt", package = "fastaR")
+#'  myGenelist <- scan(myGenelist,  what="character", sep=NULL)
 #'
-#'  fa_some_records(gene_list=myGenelist, fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
+#'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+#'  fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
 #'
 #' }
 fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
@@ -46,6 +50,8 @@ fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 
           Biostrings::writeXStringSet(x =overlap, filepath = outfile, format = "fasta")
 
+          return(overlap)
+
 }
 
 
@@ -57,19 +63,16 @@ fa_some_records <- function(gene_list, fasta_file, outfile="stdout.fa"){
 #'   In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
 #'   **Important consideration when header have big names.
 #'
-#' @return Tab delimited .size file
+#' @return A tibble of gene_id and gene length
 #' @export
-#' @importFrom Biostrings readDNAStringSet
-#' @importFrom Biostrings width
-#' @importFrom utils write.table
-#' @importFrom knitr kable
-#' @importFrom kableExtra kable_styling
-#' @importFrom kableExtra row_spec
-#' @importFrom kableExtra column_spec
+#' @importFrom Biostrings readBStringSet width
+#' @importFrom dplyr bind_cols
 #' @examples
 #' \dontrun{
 #'
-#'  fa_size(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+#'
+#'  fa_size(fasta_file=ref_fasta)
 #'
 #' }
 fa_size <- function(fasta_file){
@@ -80,26 +83,13 @@ fa_size <- function(fasta_file){
           #---- extract names and chromosome length
           names(input_sequence) <- base::gsub('[[:space:]| :].*', '', names(input_sequence))
 
-          genome_size_mat <- base::cbind(base::names(input_sequence), Biostrings::width(input_sequence))
+          genome_size_mat <- dplyr::bind_cols(Seq_id=base::names(input_sequence),Length= Biostrings::width(input_sequence))
 
-          #---- derive output name from input .fa or .fasta file
-          output_name <- base::gsub(".fa.*","", basename(fasta_file))
-
-          #---- write output
-          utils::write.table(genome_size_mat, file = paste(output_name,".size", sep=""), quote = FALSE,col.names = FALSE, row.names = FALSE,sep = "\t")
-
-          colnames(genome_size_mat) <- c("Seq_id", "Length")
+          #colnames(genome_size_mat) <- c("Seq_id", "Length")
 
           #message( paste(output_name,".size", sep=""), " file is saved in working directory!")
 
-          temp <- genome_size_mat %>% utils::head(.)
-
-          knitr::kable(temp,"html", align = "l") %>%
-                    kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F,font_size =14,  stripe_color = "aquamarine3") %>%
-                    kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
-                    kableExtra::column_spec(1:2, bold=FALSE, color="blue")
-
-
+          return(genome_size_mat)
 }
 
 #' Fasta file summary
@@ -111,24 +101,16 @@ fa_size <- function(fasta_file){
 #'   **Important consideration when header have big names.
 #' @return A summary table
 #' @export
-#' @importFrom Biostrings readDNAStringSet
-#' @importFrom Biostrings width
-#' @importFrom gridExtra ttheme_minimal
-#' @importFrom gridExtra grid.table
-#' @importFrom Biostrings letterFrequency
-#' @importFrom tidyr as_tibble
-#' @importFrom dplyr mutate
-#' @importFrom dplyr summarise
+#' @importFrom Biostrings readBStringSet letterFrequency width
+#' @importFrom dplyr bind_cols rename summarise n mutate
 #' @importFrom knitr kable
-#' @importFrom kableExtra kable_styling
-#' @importFrom dplyr n
-#' @importFrom kableExtra row_spec
-#' @importFrom kableExtra column_spec
+#' @importFrom kableExtra kable_styling row_spec column_spec
 #'
 #' @examples
 #' \dontrun{
 #'
-#'  fa_summary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+#'  fa_summary(fasta_file=ref_fasta)
 #' }
 fa_summary <- function(fasta_file){
 
@@ -141,11 +123,9 @@ fa_summary <- function(fasta_file){
                     gc_content <-  Biostrings::letterFrequency(input_sequence, "GC", collapse=TRUE)
 
 
-                    summary_length <- cbind(base::names(input_sequence), Biostrings::width(input_sequence)) %>%
-                                        tidyr::as_tibble() %>%
-                                        dplyr::mutate(V2 =as.numeric(V2)) %>%
-                                        dplyr::summarise( num_of_seq=dplyr::n(),min=min(V2), max=max(V2),mean=round(mean(V2),2),
-                                                   median= round(median(V2),2)) %>%
+                    summary_length <- dplyr::bind_cols(Seq_id=base::names(input_sequence), Length=Biostrings::width(input_sequence)) %>%
+                                        dplyr::summarise( num_of_seq=dplyr::n(),min=min(Length), max=max(Length),mean=round(mean(Length),2),
+                                                   median= round(median(Length),2)) %>%
                                         dplyr::mutate(percent_gc = round(100*(gc_content/total_length),2))
 
 
@@ -154,6 +134,7 @@ fa_summary <- function(fasta_file){
                               kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
                               kableExtra::column_spec(1:2, bold=FALSE, color="blue")
 
+                    return(summary_length)
 
 
 }
@@ -165,24 +146,17 @@ fa_summary <- function(fasta_file){
 #'   input sequence file should have extention .fa or .fasta
 #'   In the sequence header: only string before first space and/or first colon (:) will be considered for futher processes.
 #'   **Important consideration when header have big names.
-#' @return A output file of GC percent and a barplot of GC percent distribution
+#' @return A tibble of GC percent and a barplot of GC percent distribution
 #'  \code{if the fasta file contains sequences less than 20}
 #' @export
-#'
-#' @importFrom Biostrings readDNAStringSet
-#' @importFrom Biostrings letterFrequency
+#' @importFrom Biostrings readBStringSet letterFrequency
 #' @importFrom tidyr as_tibble
-#' @importFrom dplyr mutate
-#' @import ggplot2
-#' @importFrom readr write_delim
-#' @importFrom knitr kable
-#' @importFrom kableExtra kable_styling
-#' @importFrom kableExtra row_spec
-#' @importFrom kableExtra column_spec
+#' @importFrom dplyr mutate select
+#' @importFrom ggplot2 ggplot aes geom_col coord_flip theme_classic geom_text theme element_blank element_text
 #' @examples
 #' \dontrun{
-#'
-#'  fa_percent_GC(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+#'  ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+#'  fa_percent_GC(fasta_file=ref_fasta)
 #' }
 fa_percent_GC <- function(fasta_file){
 
@@ -200,8 +174,8 @@ fa_percent_GC <- function(fasta_file){
           base::colnames(nucl_table) <- c("names","sequence_len", "gc")
 
           gc_each_seq <- nucl_table %>%
-                              dplyr::mutate(percent_gc = round(100*(as.numeric(gc)/as.numeric(sequence_len)),2))
-
+                              dplyr::mutate(percent_gc = round(100*(as.numeric(gc)/as.numeric(sequence_len)),2)) %>%
+                              dplyr::select(names, percent_gc)
 
           if(nrow(gc_each_seq) <= 20){
 
@@ -217,19 +191,11 @@ fa_percent_GC <- function(fasta_file){
                                              axis.text=ggplot2::element_text(color = "black", size = 12),
                                              legend.position = "none")
                     print(gg)
-
-                    readr::write_delim(gc_each_seq, path = paste(output_name,"_percentGC.tab"), delim = "\t", col_names = TRUE)
-
+                    return(gc_each_seq)
           }
 
           else{
-
-                    readr::write_delim(gc_each_seq, path = paste(output_name,"_percentGC.tab"), delim = "\t", col_names = TRUE)
+                    return(gc_each_seq)
           }
 
-          gc_each_seq %>% dplyr::select(c("names","percent_gc")) %>% utils::head() %>%
-                    knitr::kable(.,"html", align = "l") %>%
-                    kableExtra::kable_styling(bootstrap_options = c("striped", "condensed", "responsive"), full_width = F,font_size =14,  stripe_color = "aquamarine3") %>%
-                    kableExtra::row_spec(0,bold = TRUE, italic = FALSE, color = "black") %>%
-                    kableExtra::column_spec(1:2, bold=FALSE, color="blue")
 }

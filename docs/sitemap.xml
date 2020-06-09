@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/index.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/fa_percent_GC.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/fa_size.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/fa_some_records.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/fa_summary.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/get_fasta_from_bed.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/get_flank_from_feature.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/get_promoter_from_feature.html</loc>
+  </url>
+  <url>
+    <loc>https://sethiyap.github.io/fastaR/reference/get_random_sequences_from_fasta.html</loc>
+  </url>
+</urlset>

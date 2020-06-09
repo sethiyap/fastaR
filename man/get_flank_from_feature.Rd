@@ -9,23 +9,25 @@ get_flank_from_feature(
   fasta_file,
   width = 10,
   flank_type = 1,
+  write_flankbed = FALSE,
+  write_outputfasta = FALSE,
   outfile = "flank_out"
 )
 }
 \arguments{
-\item{feature_file}{A character vector containing path to the file to either
+\item{feature_file}{Either a path or a connection to either
 a bed file, file format should be standard UCSC bed format with column:
 \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand} OR
 gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
-should be same as fasta file}
+should be same as fasta file.}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input feature is to be
 retrieved. In the sequence header: only string before first space and/or
-first colon (:) will be considered for futher processes. **Important
-consideration when header have big names.}
+first colon (:) will be considered for further processes. **Important
+consideration when header have long names.}
 
-\item{width}{Numeric, width to determine the flank length}
+\item{width}{Numeric, width to determine the flank length, Default: 10}
 
 \item{flank_type}{Numeric,choose region whose sequence (of width length) is
 to be fetched. \itemize{ \item 1: sequence upstream of start coordinate
@@ -33,13 +35,16 @@ to be fetched. \itemize{ \item 1: sequence upstream of start coordinate
 downstream of start coordinate \item 5: upstream and downstream of end
 coordinate \item 6: upstream and downstream of feature/gene coordinates
 \item 7: middle region, ie. width length from start and end coordinate
-Start----->ATGCGGATGCGGTC<------End } \code{default: 1}}
+Start----->ATGCGGATGCGGTC<------End } Default: 1}
 
-\item{outfile}{A character vector, determining outfile name, \code{default:
-flank_out}}
+\item{write_flankbed}{Logical, to return flank region as a output bed file, Default: FALSE}
+
+\item{write_outputfasta}{Logical, to return flank sequences as a output multi-fasta file, Default: FALSE}
+
+\item{outfile}{character vector, defining output file name, Default: 'flank_out'}
 }
 \value{
-
+fasta sequence and ranges of the flank region
 }
 \description{
 Extracts sequences of one of the flank type described.
@@ -47,9 +52,9 @@ Extracts sequences of one of the flank type described.
 \examples{
 \dontrun{
 
-feature_file <- "Sc_orf_coding_R64-2-1.bed"
-fasta_file <- "S288C_reference_sequence_R64-2-1_20150113.fa"
-get_flank_from_feature(feature_file = feature_file, fasta_file = fasta_file, flank_type = 2)
+feature_file_in <- system.file("exdata","Sc_ref_genes.gff", package = "fastaR")
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+fastaR::get_flank_from_feature(feature_file = feature_file_in, fasta_file = ref_fasta, flank_type = 2)
 
 }
 }

@@ -1,0 +1,10 @@
+title: fastaR
+url: https://sethiyap.github.io/fastaR
+template:
+  params:
+    bootswatch: flatly
+right:
+  menu:
+    - icon: fa-github fa-lg
+      text: "github"
+      href: https://github.com/sethiyap/fastaR

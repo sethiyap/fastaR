@@ -7,8 +7,9 @@
 fa_some_records(gene_list, fasta_file, outfile = "stdout.fa")
 }
 \arguments{
-\item{gene_list}{A charcater vector of gene names; present in multi-fasta
-file}
+\item{gene_list}{A charcter vector of gene names or gene ids;
+the gene names or gene ids should exactly match with sequence
+headers present in multi-fasta file}
 
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input list is to be
@@ -27,9 +28,11 @@ Get fasta sequences of given input list from reference
 \examples{
 \dontrun{
 
- myGenelist <- scan("Sc_myGenelist.txt",  what="character", sep=NULL)
+ myGenelist <- system.file("exdata", "Sc_myGenelist.txt", package = "fastaR")
+ myGenelist <- scan(myGenelist,  what="character", sep=NULL)
 
- fa_some_records(gene_list=myGenelist, fasta_file="Sc_orf_trans_all_R64-2-1.fasta", outfile="sc_myGenelist.fa")
+ ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+ fa_some_records(gene_list=myGenelist, fasta_file=ref_fasta, outfile="sc_myGenelist.fa")
 
 }
 }

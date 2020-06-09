@@ -7,13 +7,14 @@
 get_promoter_from_feature(
   feature_file,
   fasta_file,
-  outfile = "promoter_out",
+  write_outputfasta = FALSE,
+  write_promoterbed = FALSE,
   upstream_bp = 500,
   downstream_bp = 1
 )
 }
 \arguments{
-\item{feature_file}{A character vector containing path to the file to either
+\item{feature_file}{Either a path or a connection to either
 a bed file, file format should be standard UCSC bed format with column:
 \code{ 1. chromosome-id, 2. start, 3. end, 4. name, 5. score, 6. strand} OR
 gene feature file with extention \code{.gff or .gff3 } ** Chromosome names
@@ -22,19 +23,19 @@ should be same as fasta file}
 \item{fasta_file}{Either a path or a connection to reference multi-fasta
 file, from which subset of sequences for given input list is to be
 retrieved. In the sequence header: only string before first space and/or
-first colon (:) will be considered for futher processes. **Important
-consideration when header have big names.}
+first colon (:) will be considered for further processes. **Important
+consideration when header have long names.}
 
-\item{outfile}{A character vector, determining outfile name, default:
-promoter_out}
+\item{write_outputfasta}{Logical, to return promoter sequences as a output multi-fasta file, Default: FALSE}
 
-\item{upstream_bp}{numeric, base pairs uprstream of start coordinate}
+\item{write_promoterbed}{Logical, to return promoter regions as a output bed file, Default: FALSE}
 
-\item{downstream_bp}{numeric, base pairs downstream of start coordinate}
+\item{upstream_bp}{numeric, base pairs window upstream of start coordinate, Default: 500}
+
+\item{downstream_bp}{numeric, base pairs window downstream of start coordinate, Default: 1}
 }
 \value{
-A output fasta file of promoter sequences and bed file of the
-  promoter region
+sequences of promoters and bed file of the promoter region
 }
 \description{
 Extracts promoter sequences from input bed/gff file
@@ -42,10 +43,10 @@ Extracts promoter sequences from input bed/gff file
 \examples{
 \dontrun{
 
-get_promoter_from_feature(feature_file="Sc_orf_coding_R64-2-1.bed",
-fasta_file="S288C_reference_sequence_R64-2-1_20150113.fa",
-outfile="Sc_promoter", upstream_bp=1000, downstream_bp=100)
+feature_file_in <- system.file("exdata","Sc_ref_genes.gff", package = "fastaR")
+ref_fasta <- system.file("exdata", "Sc_ref_genome.fasta", package = "fastaR")
+fastaR::get_promoter_from_feature(feature_file=feature_file_in, fasta_file=ref_fasta,
+write_outputfasta= FALSE, write_promoterbed= FALSE, upstream_bp= 1000, downstream_bp= 100)
 
 }
-
 }

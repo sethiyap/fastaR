@@ -22,6 +22,7 @@ Get summary of input multi-fasta file like mean length, median
 \examples{
 \dontrun{
 
- fa_summary(fasta_file="Sc_orf_coding_R64-2-1.fasta")
+ ref_fasta <- system.file("exdata", "Sc_nucl_R64-2-1.fasta", package = "fastaR")
+ fa_summary(fasta_file=ref_fasta)
 }
 }
